@@ -1,0 +1,1460 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* =========================================================
+VARIÁVEIS
+========================================================= */
+:root {
+
+  /* Marca */
+  --blue-700: #0F4FB0;
+  --blue-500: #1E6FEB;
+  --blue-100: #E4EEFC;
+  --green-500: #2BC77A;
+  --green-300: #8FE8B4;
+  --green-100: #E4F9EC;
+  --yellow-400: #FFC800;
+  --yellow-600: #C99000;
+
+  /* Textos */
+  --ink-900: #0B1E33;
+  --ink-600: #44607C;
+  --ink-400: #7C93AA;
+
+  /* Fundos */
+  --paper-0: #FFFFFF;
+  --paper-50: #F5F9FD;
+
+  /* Bordas */
+  --line: #DCE6F0;
+
+  /* Gradientes */
+  --brand-gradient: linear-gradient(120deg, var(--blue-500) 0%, var(--green-500) 100%);
+
+  /* Fontes */
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Bordas */
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 26px;
+
+  /* Sombras */
+  --shadow-card: 0 20px 40px -24px rgba(15, 50, 110, .28);
+  --shadow-btn: 0 12px 24px -12px rgba(30, 111, 235, .55);
+
+  /* Largura */
+  --wrap: 1280px;
+}
+
+/* =========================================================
+RESET
+========================================================= */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+#vagas,
+#depoimentos,
+#como-funciona {
+  scroll-margin-top: 90px;
+}
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink-900);
+  background: var(--paper-50);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--ink-900);
+  margin: 0;
+  line-height: 1.15;
+}
+p {
+  margin: 0;
+  color: var(--ink-600);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* =========================================================
+EYEBROW
+========================================================= */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--blue-700);
+  background: var(--blue-100);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px clamp(20px, 5vw, 64px);
+  background: rgba(245, 249, 253, .86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+/* LOGO */
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.logo::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background: url("../imagens/logo.png") center / contain no-repeat;
+  flex-shrink: 0;
+}
+
+/* MENU */
+.header nav {
+  display: flex;
+  gap: 28px;
+}
+.header nav a {
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--ink-600);
+  transition: color .15s ease;
+}
+.header nav a:hover {
+  color: var(--blue-700);
+}
+
+/* BOTÃO HEADER */
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink-900);
+  color: var(--paper-0);
+  padding: 11px 22px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: .92rem;
+  transition: transform .15s ease, background .15s ease;
+}
+.header-btn:hover {
+  background: var(--blue-700);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+HERO
+========================================================= */
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 56px;
+  align-items: center;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 96px) clamp(20px, 5vw, 64px) 64px;
+}
+.hero-content h1 {
+  font-size: clamp(2.3rem, 4.2vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink-900);
+}
+.hero-content h1 span {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-content p {
+  margin-top: 18px;
+  font-size: 1.08rem;
+  max-width: 46ch;
+}
+
+/* =========================================================
+BUSCA
+========================================================= */
+.search-box {
+  margin-top: 32px;
+  display: flex;
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 6px;
+  box-shadow: var(--shadow-card);
+  max-width: 480px;
+}
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 18px;
+  font-size: .98rem;
+  font-family: var(--font-body);
+  color: var(--ink-900);
+}
+.search-box input::placeholder {
+  color: var(--ink-400);
+}
+.search-box input:focus {
+  outline: none;
+}
+.search-box button {
+  background: var(--brand-gradient);
+  color: #fff;
+  font-weight: 600;
+  font-size: .95rem;
+  padding: 12px 24px;
+  border-radius: 100px;
+  box-shadow: var(--shadow-btn);
+  transition: filter .15s ease, transform .15s ease;
+}
+.search-box button:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+/* LOCALIZAÇÃO */
+.location-btn {
+  margin-top: 16px;
+  background: none;
+  color: var(--blue-700);
+  font-weight: 600;
+  font-size: .92rem;
+  padding: 8px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s ease;
+}
+.location-btn:hover {
+  border-color: var(--blue-700);
+}
+
+/* BENEFÍCIOS */
+.benefits {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+.benefits span {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--ink-600);
+}
+
+/* =========================================================
+MAPA
+========================================================= */
+.hero-card {
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  isolation: isolate;
+}
+.map-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px 14px;
+  font-size: .85rem;
+}
+.map-top span {
+  color: var(--ink-400);
+  font-weight: 500;
+}
+.map-top b {
+  color: var(--green-500);
+  font-weight: 700;
+}
+.map-top b::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-500);
+  margin-right: 6px;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+.map {
+  position: relative;
+  height: 280px;
+  width: 100%;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(circle at 25% 20%, var(--blue-100), transparent 55%), radial-gradient(circle at 80% 75%, var(--green-100), transparent 55%), #EEF4FB;
+}
+.map.leaflet-container {
+  z-index: 0;
+}
+.road {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.r1 {
+  width: 220%;
+  height: 14px;
+  top: 38%;
+  left: -40%;
+  transform: rotate(-8deg);
+}
+.r2 {
+  width: 220%;
+  height: 14px;
+  top: 68%;
+  left: -50%;
+  transform: rotate(6deg);
+}
+.r3 {
+  width: 14px;
+  height: 220%;
+  top: -40%;
+  left: 32%;
+  transform: rotate(-8deg);
+}
+
+/* PINS */
+.pin {
+  position: absolute;
+  font-size: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50% 50% 50% 0;
+  transform: translate(-50%, -100%) rotate(45deg) scale(0);
+  box-shadow: 0 6px 14px -4px rgba(15, 50, 110, .4);
+  animation: drop .5s cubic-bezier(.2, 1.4, .4, 1) forwards;
+}
+.p1 {
+  background: var(--blue-500);
+  top: 38%;
+  left: 30%;
+  animation-delay: .15s;
+}
+.p2 {
+  background: var(--green-500);
+  top: 62%;
+  left: 64%;
+  animation-delay: .35s;
+}
+.p3 {
+  background: var(--yellow-400);
+  top: 26%;
+  left: 70%;
+  animation-delay: .55s;
+}
+
+/* CENTRO DO MAPA */
+.map-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--paper-0);
+  border-radius: var(--radius-m);
+  padding: 16px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  z-index: 1000;
+  pointer-events: none;
+  animation: rise .5s ease .7s forwards;
+}
+.map .leaflet-control-attribution {
+  font-size: .65rem;
+}
+.map-center strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--ink-900);
+}
+.map-center small {
+  font-size: .78rem;
+  color: var(--ink-400);
+  font-weight: 500;
+}
+
+/* =========================================================
+ANIMAÇÕES
+========================================================= */
+@keyframes drop {
+  to {
+    transform: translate(-50%, -100%) rotate(45deg) scale(1);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(43, 199, 122, .5);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(43, 199, 122, 0);
+  }
+}
+/* =========================================================
+TRANSIÇÃO ENTRE PÁGINAS
+========================================================= */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--paper-50);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s cubic-bezier(.4, 0, .2, 1);
+}
+.page-transition.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.page-transition::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--brand-gradient);
+}
+.page-transition.active::before {
+  width: 100%;
+  transition: width .5s cubic-bezier(.3, .8, .3, 1);
+}
+
+/* =========================================================
+SEÇÃO GERAL
+========================================================= */
+.section {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 64px clamp(20px, 5vw, 64px);
+}
+.section-heading {
+  max-width: 560px;
+  margin-bottom: 44px;
+}
+.section-heading h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 700;
+}
+.section-heading p {
+  margin-top: 14px;
+  font-size: 1rem;
+}
+
+/* =========================================================
+DEPOIMENTOS
+========================================================= */
+.depoimentos-section {
+  background: var(--paper-0);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 80px clamp(20px, 5vw, 64px);
+}
+.depoimentos-heading {
+  max-width: 560px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.depoimentos-heading .eyebrow {
+  margin-left: auto;
+  margin-right: auto;
+}
+.depoimentos-heading h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 700;
+}
+.depoimentos-heading p {
+  margin-top: 14px;
+  font-size: 1rem;
+}
+.depoimentos {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.depoimento {
+  background: var(--paper-50);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.depoimento-topo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.depoimento .avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: .85rem;
+  font-weight: 700;
+}
+.depoimento-topo strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: .95rem;
+  color: var(--ink-900);
+}
+.depoimento-topo span {
+  font-size: .8rem;
+  color: var(--ink-400);
+}
+.depoimento .stars {
+  color: var(--yellow-400);
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+.depoimento p {
+  font-size: .94rem;
+  font-style: italic;
+  flex: 1;
+}
+
+/* =========================================================
+COMO FUNCIONA
+========================================================= */
+.steps {
+  background: var(--paper-0);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.steps .section-heading {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 64px clamp(20px, 5vw, 64px) 0;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.steps .section-heading > * {
+  max-width: 560px;
+}
+.step-grid {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 32px clamp(20px, 5vw, 64px) 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.step-grid>div {
+  position: relative;
+  padding-left: 2px;
+}
+.step-grid span {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--blue-700);
+  background: var(--blue-100);
+  border: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+.step-grid h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.step-grid p {
+  font-size: .94rem;
+}
+
+/* =========================================================
+FOOTER
+========================================================= */
+footer {
+  background: var(--ink-900);
+  color: rgba(255, 255, 255, .7);
+  padding: 64px clamp(20px, 5vw, 64px) 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 40px;
+  max-width: var(--wrap);
+  margin: 0 auto;
+}
+footer .logo {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: #fff;
+}
+footer .logo::before {
+  background-image: url("../imagens/logo.png");
+  filter: brightness(1.1);
+}
+footer p {
+  color: rgba(255, 255, 255, .55);
+  margin-top: 12px;
+  max-width: 36ch;
+  font-size: .92rem;
+}
+.app-badges {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+.app-badges a {
+  display: block;
+  border-radius: 8px;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.app-badges a:hover {
+  transform: translateY(-2px);
+  opacity: .9;
+}
+.app-badges img {
+  height: 40px;
+  width: 135px;
+  display: block;
+}
+footer h4 {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: .92rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+footer div:not(:first-child) {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+footer a {
+  font-size: .9rem;
+  color: rgba(255, 255, 255, .62);
+  transition: color .15s ease;
+}
+footer a:hover {
+  color: #fff;
+}
+
+/* COPYRIGHT */
+.copyright {
+  text-align: center;
+  padding: 22px;
+  background: var(--ink-900);
+  color: rgba(255, 255, 255, .4);
+  font-size: .82rem;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+/* =========================================================
+TOAST
+========================================================= */
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 20px);
+  background: var(--ink-900);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 100px;
+  font-size: .92rem;
+  font-weight: 500;
+  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, .4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+#toast::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-500);
+  flex-shrink: 0;
+}
+
+/* =========================================================
+PÁGINA DE CADASTRO
+========================================================= */
+.cadastro {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  padding: 70px clamp(20px, 5vw, 64px);
+  background: radial-gradient(circle at 10% 20%, var(--blue-100), transparent 35%), radial-gradient(circle at 90% 80%, var(--green-100), transparent 35%), var(--paper-50);
+}
+.cadastro-container {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 500px) minmax(0, 500px);
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+}
+
+/* =========================================================
+INFORMAÇÕES DO CADASTRO
+========================================================= */
+.cadastro-info {
+  max-width: 500px;
+}
+.cadastro-info h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+.cadastro-info h1 span {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cadastro-info>p {
+  margin-top: 20px;
+  font-size: 1.05rem;
+  max-width: 48ch;
+}
+
+/* =========================================================
+BENEFÍCIOS DO CADASTRO
+========================================================= */
+.cadastro-beneficios {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 36px;
+}
+.beneficio {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.beneficio>span {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--green-100);
+  color: var(--green-500);
+  border: 1px solid var(--green-300);
+  border-radius: 50%;
+  font-size: .85rem;
+  font-weight: 700;
+}
+.beneficio strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+.beneficio p {
+  margin-top: 3px;
+  font-size: .86rem;
+  color: var(--ink-400);
+}
+
+/* =========================================================
+CONTAINER DO FORMULÁRIO
+========================================================= */
+.cadastro-form-container {
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 38px;
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================================
+CABEÇALHO DO FORMULÁRIO
+========================================================= */
+.form-header {
+  margin-bottom: 28px;
+}
+.form-header h2 {
+  font-size: 1.65rem;
+  font-weight: 700;
+}
+.form-header p {
+  margin-top: 7px;
+  font-size: .9rem;
+  color: var(--ink-400);
+}
+
+/* =========================================================
+CAMPOS
+========================================================= */
+.form-group {
+  margin-bottom: 18px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+.form-group input {
+  width: 100%;
+  padding: 13px 15px;
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  color: var(--ink-900);
+  font-family: var(--font-body);
+  font-size: .92rem;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.form-group input::placeholder {
+  color: var(--ink-400);
+}
+.form-group input:hover {
+  border-color: #bfd0e0;
+}
+.form-group input:focus {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px rgba(30, 111, 235, .10);
+  background: #fff;
+}
+.form-group small {
+  display: block;
+  margin-top: 6px;
+  font-size: .75rem;
+  color: var(--ink-400);
+}
+
+/* =========================================================
+SENHA
+========================================================= */
+.password-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-group input {
+  padding-right: 85px;
+}
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  color: var(--blue-700);
+  font-family: var(--font-body);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background .15s ease, color .15s ease;
+}
+.toggle-password:hover {
+  background: var(--blue-100);
+  color: var(--blue-500);
+}
+
+/* =========================================================
+TERMOS
+========================================================= */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 6px;
+  margin-bottom: 22px;
+  cursor: pointer;
+}
+.checkbox-group input {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--blue-500);
+  cursor: pointer;
+}
+.checkbox-group span {
+  font-size: .78rem;
+  line-height: 1.5;
+  color: var(--ink-600);
+}
+.checkbox-group a {
+  color: var(--blue-700);
+  font-weight: 600;
+}
+.checkbox-group a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+BOTÃO DE CADASTRO
+========================================================= */
+.cadastro-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: var(--radius-s);
+  background: var(--brand-gradient);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: .94rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-btn);
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
+.cadastro-btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+.cadastro-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+LOGIN
+========================================================= */
+.login-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: .84rem;
+  color: var(--ink-400);
+}
+.login-text a {
+  color: var(--blue-700);
+  font-weight: 600;
+  margin-left: 3px;
+}
+.login-text a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+ANIMAÇÃO DA PÁGINA DE CADASTRO
+========================================================= */
+.cadastro-info {
+  animation: cadastroInfo .6s ease both;
+}
+.cadastro-form-container {
+  animation: cadastroForm .6s ease .1s both;
+}
+@keyframes cadastroInfo {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes cadastroForm {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =========================================================
+PÁGINAS INSTITUCIONAIS
+========================================================= */
+.pagina-hero {
+  padding-bottom: 80px;
+}
+.pagina-conteudo {
+  max-width: 760px;
+}
+.pagina-conteudo h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 32px;
+  margin-bottom: 10px;
+}
+.pagina-conteudo p {
+  margin-bottom: 6px;
+  font-size: .96rem;
+}
+.pagina-conteudo ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  color: var(--ink-600);
+}
+.pagina-conteudo li {
+  margin-bottom: 6px;
+  font-size: .96rem;
+}
+.pagina-atualizado {
+  font-size: .85rem;
+  color: var(--ink-400);
+  margin-top: 8px;
+}
+
+/* FAQ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 760px;
+}
+.faq-item {
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 22px 26px;
+}
+.faq-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--ink-900);
+  margin-bottom: 6px;
+}
+.faq-item p {
+  font-size: .92rem;
+}
+
+/* CONTATO */
+.contato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.contato-info {
+  max-width: 380px;
+}
+.contato-info .beneficio {
+  margin-bottom: 22px;
+}
+.contato-form {
+  width: 100%;
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+}
+.contato-form textarea {
+  width: 100%;
+  padding: 13px 15px;
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  color: var(--ink-900);
+  font-family: var(--font-body);
+  font-size: .92rem;
+  outline: none;
+  resize: vertical;
+  min-height: 110px;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.contato-form textarea::placeholder {
+  color: var(--ink-400);
+}
+.contato-form textarea:focus {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px rgba(30, 111, 235, .10);
+  background: #fff;
+}
+
+/* EMPRESAS - CTA */
+.empresas-cta {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-gradient);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: .95rem;
+  box-shadow: var(--shadow-btn);
+  transition: transform .15s ease, filter .15s ease;
+}
+.empresas-cta:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 760px) {
+  .contato-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* =========================================================
+RESPONSIVIDADE — TABLET
+========================================================= */
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero-card {
+    order: -1;
+  }
+}
+@media (max-width: 900px) {
+  .cadastro {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .cadastro-container {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+  .cadastro-info {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .cadastro-info>p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cadastro-beneficios {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+  .cadastro-form-container {
+    margin: 0 auto;
+  }
+}
+
+/* =========================================================
+RESPONSIVIDADE — MENU / DEPOIMENTOS
+========================================================= */
+@media (max-width: 860px) {
+  .header nav {
+    display: none;
+  }
+  .depoimentos {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .step-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* =========================================================
+RESPONSIVIDADE — FOOTER
+========================================================= */
+@media (max-width: 760px) {
+  footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+RESPONSIVIDADE — CELULAR
+========================================================= */
+@media (max-width: 520px) {
+  .cadastro {
+    padding: 35px 16px;
+  }
+  .cadastro-container {
+    gap: 32px;
+  }
+  .cadastro-info h1 {
+    font-size: 2rem;
+  }
+  .cadastro-info>p {
+    font-size: .95rem;
+  }
+  .cadastro-form-container {
+    padding: 25px 20px;
+    border-radius: var(--radius-m);
+  }
+  .form-header h2 {
+    font-size: 1.4rem;
+  }
+}
+
+/* =========================================================
+ACESSIBILIDADE
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .cadastro-info, .cadastro-form-container, .page-transition {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* =========================================================
+BOTÕES DO FLUXO (CABEÇALHO / CONECTADO)
+========================================================= */
+/* São os dois botões principais do cabeçalho ("Criar cadastro" e
+   "Entrar") e o botão "Editar informações" dentro do menu do usuário.
+   - .btn-principal: o botão colorido, da ação mais importante.
+   - .btn-secundario: o botão de contorno, da ação alternativa.
+   Os dois ficam lado a lado dentro de .header-actions (display: flex). */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.btn-principal,
+.btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: .92rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease, background .15s ease;
+}
+.btn-principal {
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+  border: none;
+}
+.btn-principal:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+.btn-secundario {
+  background: var(--paper-0);
+  color: var(--blue-700);
+  border: 1px solid var(--line);
+}
+.btn-secundario:hover {
+  background: var(--blue-100);
+  transform: translateY(-1px);
+}
+
+/* Em telas bem pequenas, os botões do cabeçalho ficam mais compactos
+   para os dois caberem lado a lado com a logo */
+@media (max-width: 520px) {
+  .header-actions {
+    gap: 8px;
+  }
+  .header-actions .btn-principal,
+  .header-actions .btn-secundario {
+    padding: 9px 15px;
+    font-size: .85rem;
+  }
+}
+
+/* =========================================================
+MENU DO USUÁRIO (avatar com iniciais no cabeçalho)
+========================================================= */
+/* .user-menu é a "caixa" que contém o círculo com as iniciais e o
+   menu que aparece ao clicar nele.
+   position: relative no .user-menu + position: absolute no
+   .user-dropdown é o que permite o menu "flutuar" logo abaixo do
+   círculo, alinhado à direita. */
+.user-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--brand-gradient);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 260px;
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
+  padding: 16px;
+  z-index: 60;
+  /* Escondido por padrão; a classe "aberto" (via JS) que mostra o menu */
+  display: none;
+}
+.user-dropdown.aberto {
+  display: block;
+}
+.user-dropdown-topo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.user-avatar-grande {
+  width: 48px;
+  height: 48px;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.user-dropdown-topo strong {
+  display: block;
+  font-size: .92rem;
+  color: var(--ink-900);
+}
+.user-dropdown-topo span {
+  display: block;
+  font-size: .78rem;
+  color: var(--ink-400);
+  word-break: break-word;
+}
+.user-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 8px;
+  border-radius: var(--radius-s);
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink-900);
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.user-dropdown-item:hover {
+  background: var(--paper-50);
+}
+
+/* =========================================================
+PÁGINA "EDITAR INFORMAÇÕES"
+========================================================= */
+.editar-container {
+  max-width: 460px;
+}
+.editar-avatar-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.editar-avatar-topo strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--ink-900);
+}
+.editar-avatar-topo span {
+  display: block;
+  font-size: .85rem;
+  color: var(--ink-400);
+}
