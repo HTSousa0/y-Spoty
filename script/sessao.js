@@ -21,7 +21,7 @@ function pegarIniciais(nome) {
 }
 
 // Olha se existe alguém logado e troca o que aparece no cabeçalho
-function verificarSessao() {
+async function verificarSessao() {
   const areaDeslogado = document.getElementById("headerActionsDeslogado");
   const areaLogado = document.getElementById("userMenuLogado");
 
@@ -30,18 +30,28 @@ function verificarSessao() {
     return;
   }
 
-  const usuarioLogado = JSON.parse(localStorage.getItem("spotyUsuarioLogado") || "null");
+  // Pergunta pro Supabase se tem alguém logado agora
+  const { data: { session } } = await supabaseClient.auth.getSession();
 
-  if (usuarioLogado) {
+  if (session) {
+    // Busca o nome e e-mail do usuário logado na tabela profiles
+    const { data: perfil } = await supabaseClient
+      .from("profiles")
+      .select("nome")
+      .eq("id", session.user.id)
+      .maybeSingle();
+
+    const nome = perfil ? perfil.nome : session.user.email;
+
     areaDeslogado.style.display = "none";
     areaLogado.style.display = "block";
 
-    const iniciais = pegarIniciais(usuarioLogado.nome);
+    const iniciais = pegarIniciais(nome);
 
     document.getElementById("avatarBotao").textContent = iniciais;
     document.getElementById("avatarGrande").textContent = iniciais;
-    document.getElementById("dropdownNome").textContent = usuarioLogado.nome;
-    document.getElementById("dropdownEmail").textContent = usuarioLogado.email;
+    document.getElementById("dropdownNome").textContent = nome;
+    document.getElementById("dropdownEmail").textContent = session.user.email;
   } else {
     areaDeslogado.style.display = "flex";
     areaLogado.style.display = "none";
@@ -70,13 +80,26 @@ document.addEventListener("click", function (event) {
 // SAIR (LOGOUT)
 // ==========================================
 
-function sair() {
-  localStorage.removeItem("spotyUsuarioLogado");
+async function sair() {
+  await supabaseClient.auth.signOut();
 
   mostrarToast("Você saiu da sua conta.");
 
   // Atualiza o cabeçalho na hora (sem precisar recarregar a página)
   verificarSessao();
+}
+
+// mostrarToast pode não existir em todas as páginas que usam sessao.js
+function mostrarToast(mensagem) {
+  const toast = document.getElementById("toast");
+  if (!toast) {
+    return;
+  }
+  toast.textContent = mensagem;
+  toast.classList.add("show");
+  setTimeout(function () {
+    toast.classList.remove("show");
+  }, 3000);
 }
 
 verificarSessao();

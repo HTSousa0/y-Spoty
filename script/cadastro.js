@@ -56,7 +56,7 @@ if (telefoneInput) {
 
 // Enviar cadastro
 if (cadastroForm) {
-  cadastroForm.addEventListener("submit", function (event) {
+  cadastroForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const nomeDigitado = document.getElementById("nome").value.trim();
@@ -66,7 +66,7 @@ if (cadastroForm) {
     const senha = senhaInput.value;
     const confirmarSenha = confirmarSenhaInput.value;
 
-    // Validações
+    // Validações (iguais a antes)
     if (nomeDigitado === "") {
       mostrarToast("Digite seu nome completo.");
       return;
@@ -101,31 +101,48 @@ if (cadastroForm) {
     // Deixa o nome com a primeira letra de cada palavra maiúscula
     const nome = deixarIniciaisMaiusculas(nomeDigitado);
 
-    // Busca os usuários já cadastrados no navegador
-    const usuarios = JSON.parse(localStorage.getItem("spotyUsuarios") || "[]");
+    // Desativa o botão pra pessoa não clicar duas vezes enquanto espera
+    const botaoEnviar = cadastroForm.querySelector(".cadastro-btn");
+    if (botaoEnviar) botaoEnviar.disabled = true;
 
-    // Verifica se esse e-mail ou esse nome de usuário já foram cadastrados antes
-    for (let i = 0; i < usuarios.length; i++) {
-      if (usuarios[i].email.toLowerCase() === email.toLowerCase()) {
+    // 1) Cria o usuário no Supabase Auth (isso cuida de e-mail + senha)
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email,
+      password: senha
+    });
+
+    if (error) {
+      // Mensagens mais comuns, traduzidas
+      if (error.message.includes("already registered")) {
         mostrarToast("Esse e-mail já possui uma conta. Faça login.");
-        return;
+      } else {
+        mostrarToast("Não foi possível criar sua conta: " + error.message);
       }
-
-      if ((usuarios[i].usuario || "").toLowerCase() === usuario.toLowerCase()) {
-        mostrarToast("Esse nome de usuário já está em uso.");
-        return;
-      }
+      if (botaoEnviar) botaoEnviar.disabled = false;
+      return;
     }
 
-    // Adiciona o novo usuário à lista e salva no navegador
-    usuarios.push({
-      nome: nome,
-      usuario: usuario,
-      email: email,
-      telefone: telefone,
-      senha: senha
-    });
-    localStorage.setItem("spotyUsuarios", JSON.stringify(usuarios));
+    // 2) Salva os dados extras (nome, usuário, telefone) na tabela profiles
+    const novoUsuarioId = data.user.id;
+
+    const { error: erroPerfil } = await supabaseClient
+      .from("profiles")
+      .insert({
+        id: novoUsuarioId,
+        nome: nome,
+        usuario: usuario,
+        telefone: telefone
+      });
+
+    if (erroPerfil) {
+      if (erroPerfil.message.includes("duplicate") || erroPerfil.code === "23505") {
+        mostrarToast("Esse nome de usuário já está em uso.");
+      } else {
+        mostrarToast("Sua conta foi criada, mas houve um erro ao salvar seus dados.");
+      }
+      if (botaoEnviar) botaoEnviar.disabled = false;
+      return;
+    }
 
     mostrarToast(`Conta criada com sucesso! Agora faça login, ${nome}.`);
 

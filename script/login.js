@@ -28,7 +28,7 @@ function alternarVisibilidadeSenha(idDoCampo, botao) {
 // ==========================================
 
 if (loginForm) {
-  loginForm.addEventListener("submit", function (event) {
+  loginForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const identificador = identificadorLogin.value.trim();
@@ -44,29 +44,49 @@ if (loginForm) {
       return;
     }
 
-    // Busca a lista de usuários cadastrados no navegador
-    const usuarios = JSON.parse(localStorage.getItem("spotyUsuarios") || "[]");
+    const botaoEntrar = loginForm.querySelector(".cadastro-btn");
+    if (botaoEntrar) botaoEntrar.disabled = true;
 
-    // Procura um usuário cujo e-mail OU nome de usuário bate com o que foi digitado
-    let usuarioEncontrado = null;
+    // O Supabase Auth só faz login por e-mail. Se a pessoa digitou
+    // um "nome de usuário" em vez de e-mail, primeiro descobrimos
+    // qual e-mail está ligado a esse usuário na tabela profiles.
+    let emailParaLogin = identificador;
 
-    for (let i = 0; i < usuarios.length; i++) {
-      const emailIgual = usuarios[i].email.toLowerCase() === identificador.toLowerCase();
-      const usuarioIgual = (usuarios[i].usuario || "").toLowerCase() === identificador.toLowerCase();
-      const senhaIgual = usuarios[i].senha === senha;
+    const pareceEmail = identificador.includes("@");
 
-      if ((emailIgual || usuarioIgual) && senhaIgual) {
-        usuarioEncontrado = usuarios[i];
+    if (!pareceEmail) {
+      const { data: perfilEncontrado, error: erroBusca } = await supabaseClient
+        .from("profiles")
+        .select("id")
+        .eq("usuario", identificador)
+        .maybeSingle();
+
+      if (erroBusca || !perfilEncontrado) {
+        mostrarToast("E-mail, usuário ou senha incorretos.");
+        if (botaoEntrar) botaoEntrar.disabled = false;
+        return;
       }
-    }
 
-    if (!usuarioEncontrado) {
-      mostrarToast("E-mail, usuário ou senha incorretos.");
+      // A tabela profiles não guarda e-mail (ele fica só no Auth),
+      // então pedimos pro Supabase confirmar login usando o ID.
+      // Como o método de login exige e-mail, o jeito mais simples
+      // aqui é pedir para o usuário usar o e-mail no campo de login.
+      mostrarToast("Por enquanto, entre usando seu e-mail cadastrado.");
+      if (botaoEntrar) botaoEntrar.disabled = false;
       return;
     }
 
-    // Guarda quem está conectado agora
-    localStorage.setItem("spotyUsuarioLogado", JSON.stringify(usuarioEncontrado));
+    // Faz login de fato
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: emailParaLogin,
+      password: senha
+    });
+
+    if (error) {
+      mostrarToast("E-mail, usuário ou senha incorretos.");
+      if (botaoEntrar) botaoEntrar.disabled = false;
+      return;
+    }
 
     mostrarToast("Login realizado! Entrando...");
 
