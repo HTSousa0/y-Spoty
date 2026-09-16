@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spoty — Encontre vagas para estacionar</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+  <div class="page-transition active" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo" href="#">Spoty</a>
+    <nav>
+      <a href="#vagas" onclick="event.preventDefault(); scrollToSearch();">Buscar vagas</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#como-funciona">Como funciona</a>
+    </nav>
+    <!-- Botões principais do fluxo: aparecem quando ninguém está logado -->
+    <div class="header-actions" id="headerActionsDeslogado">
+      <a href="./html/cadastro.html" class="btn-principal" onclick="transicaoPagina(event, this.href)">
+        Criar cadastro
+      </a>
+      <a href="./html/login.html" class="btn-secundario" onclick="transicaoPagina(event, this.href)">
+        Entrar
+      </a>
+    </div>
+
+    <!-- Menu do usuário: aparece só quando alguém está logado -->
+    <div class="user-menu" id="userMenuLogado" style="display: none;">
+      <button class="user-avatar" id="avatarBotao" onclick="alternarMenuUsuario()">--</button>
+
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-topo">
+          <div class="user-avatar user-avatar-grande" id="avatarGrande">--</div>
+          <div>
+            <strong id="dropdownNome">—</strong>
+            <span id="dropdownEmail">—</span>
+          </div>
+        </div>
+
+        <a href="./html/editar-informacoes.html" class="user-dropdown-item" onclick="transicaoPagina(event, this.href)">
+          Editar informações
+        </a>
+        <button class="user-dropdown-item" onclick="sair()">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">Estacione com inteligência</span>
+        <h1>Encontre vagas livres <span>em segundos</span></h1>
+        <p>
+          O Spoty mostra estacionamentos e vagas na rua perto de você.
+          Economize tempo, combustível e estresse.
+        </p>
+
+        <div class="search-box" id="vagas">
+          <input id="searchInput" type="text" placeholder="Digite um endereço ou região">
+          <button onclick="buscarVagas()">Buscar vagas</button>
+        </div>
+
+        <button class="location-btn" onclick="usarLocalizacao()">
+          ⌖ Usar minha localização
+        </button>
+
+        <div class="benefits">
+          <span>✓ Gratuito para usar</span>
+          <span>✓ Pagamento digital</span>
+          <span>✓ Vagas em tempo real</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="map-top">
+          <span>Vagas próximas</span>
+        </div>
+        <div class="map" id="mapaReal"></div>
+      </div>
+    </section>
+
+    <section class="depoimentos-section" id="depoimentos">
+      <div class="depoimentos-heading">
+        <span class="eyebrow">Depoimentos</span>
+        <h2>O que dizem nossos usuários</h2>
+        <p>Milhares de motoristas já usam o Spoty para estacionar com mais tranquilidade todos os dias.</p>
+      </div>
+
+      <div class="depoimentos">
+        <article class="depoimento">
+          <div class="depoimento-topo">
+            <div class="avatar">MA</div>
+            <div>
+              <strong>Marina Alves</strong>
+              <span>São Paulo, SP</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>"Encontrei uma vaga em menos de um minuto, bem perto do meu trabalho."</p>
+        </article>
+
+        <article class="depoimento">
+          <div class="depoimento-topo">
+            <div class="avatar">RS</div>
+            <div>
+              <strong>Rafael Souza</strong>
+              <span>Campinas, SP</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>"O app é simples e me ajuda a economizar tempo todos os dias."</p>
+        </article>
+
+        <article class="depoimento">
+          <div class="depoimento-topo">
+            <div class="avatar">JC</div>
+            <div>
+              <strong>Juliana Costa</strong>
+              <span>Santos, SP</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>"Uso toda semana. É prático e nunca mais tive dor de cabeça pra estacionar."</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="steps" id="como-funciona">
+      <div class="section-heading">
+        <span class="eyebrow">Como funciona</span>
+        <h2>Três passos simples</h2>
+        <p>Para estacionar sem complicação no seu dia a dia.</p>
+      </div>
+
+      <div class="step-grid">
+        <div>
+          <span>01</span>
+          <h3>Busque a vaga</h3>
+          <p>Informe o endereço ou permita o acesso à sua localização para ver vagas livres perto de você.</p>
+        </div>
+        <div>
+          <span>02</span>
+          <h3>Escolha e reserve</h3>
+          <p>Compare preços, distância e avaliações. Reserve com um toque ou vá direto à vaga de rua.</p>
+        </div>
+        <div>
+          <span>03</span>
+          <h3>Pague pelo app</h3>
+          <p>Use cartão de crédito, PIX ou saldo Spoty e acompanhe tudo direto no celular.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>
+      <a class="logo" href="#">Spoty</a>
+      <p>A maneira mais fácil de encontrar, estacionar e gerenciar vagas no Brasil.</p>
+      <div class="app-badges">
+        <a href="https://apps.apple.com" aria-label="Baixar na App Store" target="_blank" rel="noopener">
+          <img src="./imagens/badge-appstore.svg" alt="Download on the App Store">
+        </a>
+        <a href="https://play.google.com/store" aria-label="Disponível no Google Play" target="_blank" rel="noopener">
+          <img src="./imagens/badge-googleplay.svg" alt="Get it on Google Play">
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Produto</h4>
+      <a href="#vagas" onclick="event.preventDefault(); scrollToSearch();">Buscar vagas</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="./html/empresas.html" onclick="transicaoPagina(event, this.href)">Para empresas</a>
+    </div>
+    <div>
+      <h4>Suporte</h4>
+      <a href="./html/central-ajuda.html" onclick="transicaoPagina(event, this.href)">Central de ajuda</a>
+      <a href="./html/fale-conosco.html" onclick="transicaoPagina(event, this.href)">Fale conosco</a>
+      <a href="./html/termos-uso.html" onclick="transicaoPagina(event, this.href)">Termos de uso</a>
+      <a href="./html/privacidade.html" onclick="transicaoPagina(event, this.href)">Privacidade</a>
+    </div>
+  </footer>
+
+  <div class="copyright">© 2026 Spoty. Todos os direitos reservados.</div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="./scripts/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./scripts/supabaseClient.js"></script>
+  <script src="./scripts/sessao.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Você está conectado — Spoty</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="page-transition active" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo" href="../index.html" onclick="transicaoPagina(event, this.href)">Spoty</a>
+    <nav>
+      <a href="../index.html#vagas">Buscar vagas</a>
+      <a href="../index.html#depoimentos">Depoimentos</a>
+      <a href="../index.html#como-funciona">Como funciona</a>
+    </nav>
+    <!-- Menu do usuário: ícone com as iniciais no canto direito -->
+    <div class="user-menu">
+      <button class="user-avatar" id="avatarBotao" onclick="alternarMenuUsuario()">--</button>
+
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-topo">
+          <div class="user-avatar user-avatar-grande" id="avatarGrande">--</div>
+          <div>
+            <strong id="dropdownNome">—</strong>
+            <span id="dropdownEmail">—</span>
+          </div>
+        </div>
+
+        <a href="editar-informacoes.html" class="user-dropdown-item" onclick="transicaoPagina(event, this.href)">
+          Editar informações
+        </a>
+        <button class="user-dropdown-item" onclick="sair()">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section conectado">
+
+      <div class="conectado-card">
+        <div class="conectado-check">✓</div>
+
+        <span class="eyebrow">Sessão ativa</span>
+        <h1>Você está conectado!</h1>
+
+        <p class="conectado-boas-vindas">
+          Que bom te ver por aqui, <strong id="nomeUsuario">usuário</strong>.
+        </p>
+
+        <div class="conectado-dados">
+          <div>
+            <small>Nome</small>
+            <strong id="dadoNome">—</strong>
+          </div>
+          <div>
+            <small>E-mail</small>
+            <strong id="dadoEmail">—</strong>
+          </div>
+        </div>
+
+        <div class="conectado-acoes">
+          <a href="../index.html" class="btn-principal" onclick="transicaoPagina(event, this.href)">
+            Buscar vagas
+          </a>
+          <button class="btn-secundario" onclick="sair()">Sair</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../scripts/supabaseClient.js"></script>
+  <script src="../scripts/conectado.js"></script>
+</body>
+</html>

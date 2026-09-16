@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar — Spoty</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="page-transition active" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo" href="../index.html" onclick="transicaoPagina(event, this.href)">Spoty</a>
+    <nav>
+      <a href="../index.html#vagas">Buscar vagas</a>
+      <a href="../index.html#depoimentos">Depoimentos</a>
+      <a href="../index.html#como-funciona">Como funciona</a>
+    </nav>
+    <a href="../index.html" class="header-btn" onclick="transicaoPagina(event, this.href)">Voltar</a>
+  </header>
+
+  <main>
+    <section class="cadastro">
+      <div class="cadastro-container">
+
+        <!-- Informações -->
+        <div class="cadastro-info">
+          <span class="eyebrow">Bem-vindo de volta</span>
+          <h1>Entre na sua conta do <span>Spoty</span></h1>
+          <p>
+            Acesse sua conta para encontrar vagas,
+            acompanhar estacionamentos próximos e
+            estacionar com mais praticidade.
+          </p>
+
+          <div class="cadastro-beneficios">
+            <div class="beneficio">
+              <span>✓</span>
+              <div>
+                <strong>Suas vagas favoritas</strong>
+                <p>Salve os estacionamentos que você mais usa.</p>
+              </div>
+            </div>
+
+            <div class="beneficio">
+              <span>✓</span>
+              <div>
+                <strong>Histórico de uso</strong>
+                <p>Consulte onde e quando você estacionou.</p>
+              </div>
+            </div>
+
+            <div class="beneficio">
+              <span>✓</span>
+              <div>
+                <strong>Pagamento mais rápido</strong>
+                <p>Seus dados ficam salvos para agilizar tudo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário de login -->
+        <div class="cadastro-form-container">
+          <div class="form-header">
+            <h2>Entrar</h2>
+            <p>Use o e-mail e a senha do seu cadastro.</p>
+          </div>
+
+          <form id="loginForm">
+
+            <!-- E-mail -->
+            <div class="form-group">
+              <label for="identificadorLogin">E-mail</label>
+              <input type="email" id="identificadorLogin" name="identificador" placeholder="Digite seu e-mail" required>
+            </div>
+
+            <!-- Senha -->
+            <div class="form-group">
+              <label for="senhaLogin">Senha</label>
+              <div class="password-group">
+                <input type="password" id="senhaLogin" name="senha" placeholder="Digite sua senha" required>
+                <button type="button" class="toggle-password" onclick="alternarVisibilidadeSenha('senhaLogin', this)">Mostrar</button>
+              </div>
+            </div>
+
+            <!-- Botão -->
+            <button type="submit" class="cadastro-btn">Entrar</button>
+
+          </form>
+
+          <p class="login-text">
+            Ainda não tem uma conta?
+            <a href="cadastro.html" onclick="transicaoPagina(event, this.href)">Criar cadastro</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../scripts/supabaseClient.js"></script>
+  <script src="../scripts/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar informações — Spoty</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="page-transition active" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo" href="../index.html" onclick="transicaoPagina(event, this.href)">Spoty</a>
+    <nav>
+      <a href="../index.html#vagas">Buscar vagas</a>
+      <a href="../index.html#depoimentos">Depoimentos</a>
+      <a href="../index.html#como-funciona">Como funciona</a>
+    </nav>
+    <a href="../index.html" class="header-btn" onclick="transicaoPagina(event, this.href)">Voltar</a>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-heading">
+        <span class="eyebrow">Minha conta</span>
+        <h1>Editar informações</h1>
+        <p>Atualize seus dados de cadastro. Deixe a senha em branco se não quiser alterá-la.</p>
+      </div>
+
+      <div class="editar-container">
+
+        <!-- Avatar grande + nome atual -->
+        <div class="editar-avatar-topo">
+          <div class="user-avatar user-avatar-grande" id="avatarEditar">--</div>
+          <div>
+            <strong id="nomeAtual">—</strong>
+            <span id="emailAtual">—</span>
+          </div>
+        </div>
+
+        <form id="editarForm" class="contato-form">
+          <div class="form-group">
+            <label for="nomeEditar">Nome completo</label>
+            <input type="text" id="nomeEditar" name="nome" placeholder="Digite seu nome completo" required>
+          </div>
+
+          <div class="form-group">
+            <label for="usuarioEditar">Nome de usuário</label>
+            <input type="text" id="usuarioEditar" name="usuario" placeholder="Digite seu nome de usuário" required>
+          </div>
+
+          <div class="form-group">
+            <label for="emailEditar">E-mail</label>
+            <input type="email" id="emailEditar" name="email" placeholder="Digite seu e-mail" required>
+          </div>
+
+          <div class="form-group">
+            <label for="telefoneEditar">Telefone</label>
+            <input type="tel" id="telefoneEditar" name="telefone" placeholder="(00) 00000-0000" required>
+          </div>
+
+          <div class="form-group">
+            <label for="senhaEditar">Nova senha (opcional)</label>
+            <div class="password-group">
+              <input type="password" id="senhaEditar" name="senha" placeholder="Deixe em branco para manter a atual" minlength="6">
+              <button type="button" class="toggle-password" onclick="alternarVisibilidadeSenha('senhaEditar', this)">Mostrar</button>
+            </div>
+          </div>
+
+          <button type="submit" class="cadastro-btn">Salvar alterações</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../scripts/supabaseClient.js"></script>
+  <script src="../scripts/editar-informacoes.js"></script>
+</body>
+</html>

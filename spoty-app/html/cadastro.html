@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crie sua conta — Spoty</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="page-transition active" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo" href="../index.html" onclick="transicaoPagina(event, this.href)">Spoty</a>
+    <nav>
+      <a href="../index.html#vagas">Buscar vagas</a>
+      <a href="../index.html#depoimentos">Depoimentos</a>
+      <a href="../index.html#como-funciona">Como funciona</a>
+    </nav>
+    <a href="../index.html" class="header-btn" onclick="transicaoPagina(event, this.href)">Voltar</a>
+  </header>
+
+  <main>
+    <section class="cadastro">
+      <div class="cadastro-container">
+
+        <!-- Informações -->
+        <div class="cadastro-info">
+          <span class="eyebrow">Comece agora</span>
+          <h1>Crie sua conta no <span>Spoty</span></h1>
+          <p>
+            Encontre vagas, acompanhe estacionamentos próximos
+            e tenha mais praticidade para estacionar no seu
+            dia a dia.
+          </p>
+
+          <div class="cadastro-beneficios">
+            <div class="beneficio">
+              <span>✓</span>
+              <div>
+                <strong>Encontre vagas rapidamente</strong>
+                <p>Veja opções próximas da sua localização.</p>
+              </div>
+            </div>
+
+            <div class="beneficio">
+              <span>✓</span>
+              <div>
+                <strong>Compare as melhores opções</strong>
+                <p>Consulte preços, distância e avaliações.</p>
+              </div>
+            </div>
+
+            <div class="beneficio">
+              <span>✓</span>
+              <div>
+                <strong>Tudo em um só lugar</strong>
+                <p>Estacionamentos rotativos, privativos e mensais de forma simples.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário -->
+        <div class="cadastro-form-container">
+          <div class="form-header">
+            <h2>Crie sua conta</h2>
+            <p>Preencha seus dados para começar.</p>
+          </div>
+
+          <form id="cadastroForm">
+
+            <!-- Nome -->
+            <div class="form-group">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+            </div>
+
+            <!-- Nome de usuário -->
+            <div class="form-group">
+              <label for="usuario">Nome de usuário</label>
+              <input type="text" id="usuario" name="usuario" placeholder="Escolha um nome de usuário" required>
+            </div>
+
+            <!-- E-mail -->
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="Digite seu melhor e-mail" required>
+            </div>
+
+            <!-- Telefone -->
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+            </div>
+
+            <!-- Senha -->
+            <div class="form-group">
+              <label for="senha">Crie uma senha</label>
+              <div class="password-group">
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required minlength="6">
+                <button type="button" class="toggle-password" onclick="alternarVisibilidadeSenha('senha', this)">Mostrar</button>
+              </div>
+              <small>Sua senha deve ter pelo menos 6 caracteres.</small>
+            </div>
+
+            <!-- Confirmar senha -->
+            <div class="form-group">
+              <label for="confirmarSenha">Confirme sua senha</label>
+              <div class="password-group">
+                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite novamente sua senha" required minlength="6">
+                <button type="button" class="toggle-password" onclick="alternarVisibilidadeSenha('confirmarSenha', this)">Mostrar</button>
+              </div>
+            </div>
+
+            <!-- Termos -->
+            <label class="checkbox-group">
+              <input type="checkbox" id="termos" required>
+              <span>
+                Li e concordo com os
+                <a href="termos-uso.html" onclick="transicaoPagina(event, this.href)">Termos de Uso</a>
+                e a
+                <a href="privacidade.html" onclick="transicaoPagina(event, this.href)">Política de Privacidade</a>.
+              </span>
+            </label>
+
+            <!-- Botão -->
+            <button type="submit" class="cadastro-btn">Criar minha conta</button>
+
+          </form>
+
+          <p class="login-text">
+            Já possui uma conta?
+            <a href="login.html" onclick="transicaoPagina(event, this.href)">Entrar</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../scripts/supabaseClient.js"></script>
+  <script src="../scripts/cadastro.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de ajuda — Spoty</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="page-transition active" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo" href="../index.html" onclick="transicaoPagina(event, this.href)">Spoty</a>
+    <nav>
+      <a href="../index.html#vagas">Buscar vagas</a>
+      <a href="../index.html#depoimentos">Depoimentos</a>
+      <a href="../index.html#como-funciona">Como funciona</a>
+    </nav>
+    <a href="cadastro.html" class="header-btn" onclick="transicaoPagina(event, this.href)">Cadastre-se</a>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-heading">
+        <span class="eyebrow">Suporte</span>
+        <h1>Central de ajuda</h1>
+        <p>Reunimos as dúvidas mais comuns sobre o Spoty. Não encontrou o que precisa? Fale com a gente.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <strong>Como faço para buscar vagas próximas de mim?</strong>
+          <p>Digite um endereço ou região na busca da página inicial, ou toque em "Usar minha localização" para ver as vagas mais próximas de onde você está.</p>
+        </div>
+
+        <div class="faq-item">
+          <strong>Como funciona o pagamento das vagas?</strong>
+          <p>Você pode pagar direto pelo app usando cartão de crédito, PIX ou o saldo Spoty. O comprovante fica disponível no seu histórico.</p>
+        </div>
+
+        <div class="faq-item">
+          <strong>Posso cancelar uma reserva de vaga?</strong>
+          <p>Sim. Reservas podem ser canceladas antes do horário de entrada, sem custo adicional, direto pela tela da reserva.</p>
+        </div>
+
+        <div class="faq-item">
+          <strong>O Spoty funciona em quais cidades?</strong>
+          <p>Estamos expandindo continuamente. As vagas disponíveis na sua região aparecem automaticamente ao buscar ou usar sua localização.</p>
+        </div>
+
+        <div class="faq-item">
+          <strong>Esqueci minha senha, e agora?</strong>
+          <p>Na tela de login, use a opção de recuperação de senha informando o e-mail cadastrado para receber as instruções de redefinição.</p>
+        </div>
+
+        <div class="faq-item">
+          <strong>Como cadastro meu estacionamento no Spoty?</strong>
+          <p>Acesse a página "Para empresas" e fale com nosso time para colocar suas vagas na plataforma.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <a class="logo" href="../index.html" onclick="transicaoPagina(event, this.href)">Spoty</a>
+      <p>A maneira mais fácil de encontrar, estacionar e gerenciar vagas no Brasil.</p>
+      <div class="app-badges">
+        <a href="https://apps.apple.com" aria-label="Baixar na App Store" target="_blank" rel="noopener">
+          <img src="../imagens/badge-appstore.svg" alt="Download on the App Store">
+        </a>
+        <a href="https://play.google.com/store" aria-label="Disponível no Google Play" target="_blank" rel="noopener">
+          <img src="../imagens/badge-googleplay.svg" alt="Get it on Google Play">
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Produto</h4>
+      <a href="../index.html#vagas">Buscar vagas</a>
+      <a href="../index.html#depoimentos">Depoimentos</a>
+      <a href="../index.html#como-funciona">Como funciona</a>
+      <a href="empresas.html" onclick="transicaoPagina(event, this.href)">Para empresas</a>
+    </div>
+    <div>
+      <h4>Suporte</h4>
+      <a href="central-ajuda.html" onclick="transicaoPagina(event, this.href)">Central de ajuda</a>
+      <a href="fale-conosco.html" onclick="transicaoPagina(event, this.href)">Fale conosco</a>
+      <a href="termos-uso.html" onclick="transicaoPagina(event, this.href)">Termos de uso</a>
+      <a href="privacidade.html" onclick="transicaoPagina(event, this.href)">Privacidade</a>
+    </div>
+  </footer>
+
+  <div class="copyright">© 2026 Spoty. Todos os direitos reservados.</div>
+
+  <div id="toast"></div>
+
+  <script src="../scripts/paginas.js"></script>
+</body>
+</html>
