@@ -76,6 +76,12 @@
               <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
             </div>
 
+            <!-- Nome de usuário -->
+            <div class="form-group">
+              <label for="usuario">Nome de usuário</label>
+              <input type="text" id="usuario" name="usuario" placeholder="Escolha um nome de usuário" required>
+            </div>
+
             <!-- E-mail -->
             <div class="form-group">
               <label for="email">E-mail</label>
@@ -93,7 +99,7 @@
               <label for="senha">Crie uma senha</label>
               <div class="password-group">
                 <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required minlength="6">
-                <button type="button" class="toggle-password" onclick="mostrarSenha()">Mostrar</button>
+                <button type="button" class="toggle-password" onclick="alternarVisibilidadeSenha('senha', this)">Mostrar</button>
               </div>
               <small>Sua senha deve ter pelo menos 6 caracteres.</small>
             </div>
@@ -101,7 +107,10 @@
             <!-- Confirmar senha -->
             <div class="form-group">
               <label for="confirmarSenha">Confirme sua senha</label>
-              <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite novamente sua senha" required minlength="6">
+              <div class="password-group">
+                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite novamente sua senha" required minlength="6">
+                <button type="button" class="toggle-password" onclick="alternarVisibilidadeSenha('confirmarSenha', this)">Mostrar</button>
+              </div>
             </div>
 
             <!-- Termos -->
@@ -122,7 +131,7 @@
 
           <p class="login-text">
             Já possui uma conta?
-            <a href="#">Entrar</a>
+            <a href="login.html" onclick="transicaoPagina(event, this.href)">Entrar</a>
           </p>
         </div>
 

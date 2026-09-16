@@ -18,9 +18,35 @@
       <a href="#depoimentos">Depoimentos</a>
       <a href="#como-funciona">Como funciona</a>
     </nav>
-    <a href="cadastro.html" class="header-btn" onclick="transicaoPagina(event, this.href)">
-      Cadastre-se
-    </a>
+    <!-- Botões principais do fluxo: aparecem quando ninguém está logado -->
+    <div class="header-actions" id="headerActionsDeslogado">
+      <a href="cadastro.html" class="btn-principal" onclick="transicaoPagina(event, this.href)">
+        Criar cadastro
+      </a>
+      <a href="login.html" class="btn-secundario" onclick="transicaoPagina(event, this.href)">
+        Entrar
+      </a>
+    </div>
+
+    <!-- Menu do usuário: aparece só quando alguém está logado -->
+    <div class="user-menu" id="userMenuLogado" style="display: none;">
+      <button class="user-avatar" id="avatarBotao" onclick="alternarMenuUsuario()">--</button>
+
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-topo">
+          <div class="user-avatar user-avatar-grande" id="avatarGrande">--</div>
+          <div>
+            <strong id="dropdownNome">—</strong>
+            <span id="dropdownEmail">—</span>
+          </div>
+        </div>
+
+        <a href="editar-informacoes.html" class="user-dropdown-item" onclick="transicaoPagina(event, this.href)">
+          Editar informações
+        </a>
+        <button class="user-dropdown-item" onclick="sair()">Sair</button>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -173,5 +199,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="../script/script.js"></script>
+  <script src="../script/sessao.js"></script>
 </body>
 </html>

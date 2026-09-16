@@ -1286,3 +1286,175 @@ ACESSIBILIDADE
     transition: none;
   }
 }
+
+/* =========================================================
+BOTÕES DO FLUXO (CABEÇALHO / CONECTADO)
+========================================================= */
+/* São os dois botões principais do cabeçalho ("Criar cadastro" e
+   "Entrar") e o botão "Editar informações" dentro do menu do usuário.
+   - .btn-principal: o botão colorido, da ação mais importante.
+   - .btn-secundario: o botão de contorno, da ação alternativa.
+   Os dois ficam lado a lado dentro de .header-actions (display: flex). */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.btn-principal,
+.btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: .92rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease, background .15s ease;
+}
+.btn-principal {
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+  border: none;
+}
+.btn-principal:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+.btn-secundario {
+  background: var(--paper-0);
+  color: var(--blue-700);
+  border: 1px solid var(--line);
+}
+.btn-secundario:hover {
+  background: var(--blue-100);
+  transform: translateY(-1px);
+}
+
+/* Em telas bem pequenas, os botões do cabeçalho ficam mais compactos
+   para os dois caberem lado a lado com a logo */
+@media (max-width: 520px) {
+  .header-actions {
+    gap: 8px;
+  }
+  .header-actions .btn-principal,
+  .header-actions .btn-secundario {
+    padding: 9px 15px;
+    font-size: .85rem;
+  }
+}
+
+/* =========================================================
+MENU DO USUÁRIO (avatar com iniciais no cabeçalho)
+========================================================= */
+/* .user-menu é a "caixa" que contém o círculo com as iniciais e o
+   menu que aparece ao clicar nele.
+   position: relative no .user-menu + position: absolute no
+   .user-dropdown é o que permite o menu "flutuar" logo abaixo do
+   círculo, alinhado à direita. */
+.user-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--brand-gradient);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 260px;
+  background: var(--paper-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
+  padding: 16px;
+  z-index: 60;
+  /* Escondido por padrão; a classe "aberto" (via JS) que mostra o menu */
+  display: none;
+}
+.user-dropdown.aberto {
+  display: block;
+}
+.user-dropdown-topo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.user-avatar-grande {
+  width: 48px;
+  height: 48px;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.user-dropdown-topo strong {
+  display: block;
+  font-size: .92rem;
+  color: var(--ink-900);
+}
+.user-dropdown-topo span {
+  display: block;
+  font-size: .78rem;
+  color: var(--ink-400);
+  word-break: break-word;
+}
+.user-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 8px;
+  border-radius: var(--radius-s);
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink-900);
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.user-dropdown-item:hover {
+  background: var(--paper-50);
+}
+
+/* =========================================================
+PÁGINA "EDITAR INFORMAÇÕES"
+========================================================= */
+.editar-container {
+  max-width: 460px;
+}
+.editar-avatar-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.editar-avatar-topo strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--ink-900);
+}
+.editar-avatar-topo span {
+  display: block;
+  font-size: .85rem;
+  color: var(--ink-400);
+}

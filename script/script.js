@@ -284,6 +284,9 @@ function buscarCoordenadasEAtualizarMapa(endereco) {
 }
 
 // Ao carregar a página, tenta centralizar o mapa na localização real do usuário
+// Ao carregar a página, o mapa abre no local padrão (São Paulo).
+// A localização real só é pedida quando o usuário clica em
+// "Usar minha localização" (função usarLocalizacao, mais acima).
 function iniciarLocalizacaoDoMapa() {
   const mapaEl = document.getElementById("mapaReal");
 
@@ -291,21 +294,7 @@ function iniciarLocalizacaoDoMapa() {
     return;
   }
 
-  if (!navigator.geolocation) {
-    iniciarMapaReal(CENTRO_PADRAO.lat, CENTRO_PADRAO.lng);
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      iniciarMapaReal(position.coords.latitude, position.coords.longitude);
-    },
-    function () {
-      // Sem permissão ou erro: usa o centro padrão
-      iniciarMapaReal(CENTRO_PADRAO.lat, CENTRO_PADRAO.lng);
-    },
-    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
-  );
+  iniciarMapaReal(CENTRO_PADRAO.lat, CENTRO_PADRAO.lng);
 }
 
 iniciarLocalizacaoDoMapa();
@@ -379,5 +368,35 @@ window.addEventListener("pageshow", function () {
 // ==========================================
 // INICIALIZAÇÃO
 // ==========================================
+
+// ==========================================
+// ROLAGEM SUAVE AO ABRIR COM UMA ÂNCORA
+// ==========================================
+// Quando o link "Buscar vagas / Depoimentos / Como funciona" é clicado
+// em OUTRA página (ex.: cadastro.html), o navegador abre o index.html
+// e pula direto para a seção, sem animação. Esta função corrige isso:
+// a página começa no topo e rola suavemente até a seção certa.
+
+function rolarParaAncoraInicial() {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const secaoAlvo = document.querySelector(window.location.hash);
+
+  if (!secaoAlvo) {
+    return;
+  }
+
+  // Começa do topo (desfaz o "pulo" instantâneo do navegador)
+  window.scrollTo(0, 0);
+
+  // Espera a cortina de transição entre páginas sumir antes de rolar
+  setTimeout(function () {
+    secaoAlvo.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 450);
+}
+
+window.addEventListener("load", rolarParaAncoraInicial);
 
 console.log("Spoty carregado com sucesso!");

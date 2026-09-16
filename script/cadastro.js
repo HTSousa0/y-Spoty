@@ -4,17 +4,31 @@ const confirmarSenhaInput = document.getElementById("confirmarSenha");
 const telefoneInput = document.getElementById("telefone");
 const toast = document.getElementById("toast");
 
-// Mostrar ou ocultar senha
-function mostrarSenha() {
-  const botao = document.querySelector(".toggle-password");
+// Mostrar ou ocultar uma senha (usada no campo "senha" e no "confirmarSenha")
+function alternarVisibilidadeSenha(idDoCampo, botao) {
+  const campo = document.getElementById(idDoCampo);
 
-  if (senhaInput.type === "password") {
-    senhaInput.type = "text";
+  if (campo.type === "password") {
+    campo.type = "text";
     botao.textContent = "Ocultar";
   } else {
-    senhaInput.type = "password";
+    campo.type = "password";
     botao.textContent = "Mostrar";
   }
+}
+
+// Deixa a primeira letra de cada nome maiúscula
+// Ex.: "lucas silva PIRES" -> "Lucas Silva Pires"
+function deixarIniciaisMaiusculas(nome) {
+  const palavras = nome.trim().split(/\s+/);
+
+  const palavrasFormatadas = palavras.map(function (palavra) {
+    const primeiraLetra = palavra.charAt(0).toUpperCase();
+    const restante = palavra.slice(1).toLowerCase();
+    return primeiraLetra + restante;
+  });
+
+  return palavrasFormatadas.join(" ");
 }
 
 // Formatar telefone
@@ -45,19 +59,31 @@ if (cadastroForm) {
   cadastroForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nome = document.getElementById("nome").value.trim();
+    const nomeDigitado = document.getElementById("nome").value.trim();
+    const usuario = document.getElementById("usuario").value.trim();
     const email = document.getElementById("email").value.trim();
+    const telefone = telefoneInput.value.trim();
     const senha = senhaInput.value;
     const confirmarSenha = confirmarSenhaInput.value;
 
     // Validações
-    if (nome === "") {
+    if (nomeDigitado === "") {
       mostrarToast("Digite seu nome completo.");
+      return;
+    }
+
+    if (usuario === "") {
+      mostrarToast("Escolha um nome de usuário.");
       return;
     }
 
     if (email === "") {
       mostrarToast("Digite seu e-mail.");
+      return;
+    }
+
+    if (telefone === "") {
+      mostrarToast("Digite seu telefone.");
       return;
     }
 
@@ -72,14 +98,43 @@ if (cadastroForm) {
       return;
     }
 
-    // Cadastro simulado
-    console.log("Cadastro realizado!");
-    console.log("Nome:", nome);
-    console.log("E-mail:", email);
+    // Deixa o nome com a primeira letra de cada palavra maiúscula
+    const nome = deixarIniciaisMaiusculas(nomeDigitado);
 
-    mostrarToast(`Conta criada com sucesso! Bem-vindo ao Spoty, ${nome}!`);
+    // Busca os usuários já cadastrados no navegador
+    const usuarios = JSON.parse(localStorage.getItem("spotyUsuarios") || "[]");
+
+    // Verifica se esse e-mail ou esse nome de usuário já foram cadastrados antes
+    for (let i = 0; i < usuarios.length; i++) {
+      if (usuarios[i].email.toLowerCase() === email.toLowerCase()) {
+        mostrarToast("Esse e-mail já possui uma conta. Faça login.");
+        return;
+      }
+
+      if ((usuarios[i].usuario || "").toLowerCase() === usuario.toLowerCase()) {
+        mostrarToast("Esse nome de usuário já está em uso.");
+        return;
+      }
+    }
+
+    // Adiciona o novo usuário à lista e salva no navegador
+    usuarios.push({
+      nome: nome,
+      usuario: usuario,
+      email: email,
+      telefone: telefone,
+      senha: senha
+    });
+    localStorage.setItem("spotyUsuarios", JSON.stringify(usuarios));
+
+    mostrarToast(`Conta criada com sucesso! Agora faça login, ${nome}.`);
 
     cadastroForm.reset();
+
+    // Depois do cadastro, leva o usuário para a tela de login
+    setTimeout(function () {
+      window.location.href = "login.html";
+    }, 1400);
   });
 }
 
